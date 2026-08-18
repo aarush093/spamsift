@@ -1,0 +1,50 @@
+seed: 42
+
+data:
+  base_url: https://spamassassin.apache.org/old/publiccorpus/
+  raw_dir: data/raw
+  processed_csv: data/processed/emails.csv
+  summary_json: reports/data_summary.json
+  archives:
+    - file: 20030228_easy_ham.tar.bz2
+      label: 0
+    - file: 20030228_easy_ham_2.tar.bz2
+      label: 0
+    - file: 20030228_hard_ham.tar.bz2
+      label: 0
+    - file: 20030228_spam.tar.bz2
+      label: 1
+    - file: 20050311_spam_2.tar.bz2
+      label: 1
+
+tfidf:
+  word:
+    ngram_range: [1, 2]
+    min_df: 2
+    sublinear_tf: true
+  char:
+    analyzer: char_wb
+    ngram_range: [3, 5]
+    min_df: 2
+
+model:
+  logistic_regression:
+    max_iter: 2000
+  cv_folds: 5
+  c_grid: [0.1, 1, 10]
+  nb_margin: 0.01
+
+threshold:
+  precision_target: 0.98
+  fallback: 0.5
+
+split:
+  test_size: 0.2
+
+artifact:
+  path: models/model.joblib
+
+reports:
+  metrics_json: reports/metrics.json
+  error_analysis_md: reports/error_analysis.md
+  figures_dir: reports/figures
