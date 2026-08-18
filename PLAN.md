@@ -25,10 +25,10 @@ Scope:
 7. git init, first commit, `gh repo create spamsift --public --source . --push`.
 
 Acceptance checklist:
-- [ ] `pip install -r requirements.txt` completes clean inside .venv
-- [ ] `ruff check .` passes
-- [ ] Repo live at github.com/aarush093/spamsift with the initial commit
-- [ ] CLAUDE.md and PLAN.md committed at repo root
+- [x] `pip install -r requirements.txt` completes clean inside .venv
+- [x] `ruff check .` passes
+- [x] Repo live at github.com/aarush093/spamsift with the initial commit
+- [x] CLAUDE.md and PLAN.md committed at repo root
 
 Prompt to paste:
 
@@ -146,3 +146,15 @@ Read CLAUDE.md fully, then PLAN.md. Execute Day 5 only. Pull every number in the
 ## Progress log
 
 Claude Code appends one entry at the end of every session: date, what shipped, decisions taken, deviations and fallbacks with reasons.
+
+### Day 0 · 17 August 2026 · Scaffold
+
+Shipped: full repo layout from CLAUDE.md with empty placeholder modules (src/*.py, app/main.py); requirements.txt with exact pins of current stable versions (pandas 3.0.5, scikit-learn 1.9.0, beautifulsoup4 4.15.0, fastapi 0.141.1, uvicorn 0.52.3, pydantic 2.13.4, joblib 1.5.3, PyYAML 6.0.3, matplotlib 3.11.1, pytest 9.1.1, httpx 0.28.1, ruff 0.16.3); config.yaml with seed, data URLs/filenames, tfidf/model params, precision target 0.98, threshold fallback 0.5, artifact path, test size 0.2; .gitignore; pyproject.toml with ruff line length 100; MIT LICENSE; README stub. Installed deps into pre-existing .venv (Python 3.12.10).
+
+Verified: `pip install -r requirements.txt` clean, `ruff check .` passes, repo live at github.com/aarush093/spamsift with initial commit, CLAUDE.md and PLAN.md at repo root.
+
+Decisions/deviations:
+- Renamed default branch master -> main so it matches the `push main` references in Day 4. GitHub default branch updated accordingly.
+- Added `.claude/` to .gitignore (machine-local Claude Code settings, not project content). This is beyond the .gitignore items listed in the Day 0 scope; logged here per the dependency/deviation rule.
+- Used .gitkeep files in app/static, tests, reports/figures and models so these tracked directories survive the commit while still empty.
+- No new dependencies added beyond the stack list.
